@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+</head>
+<body>
+  {% for fb in fizzbuzz %}
+  <div style="color:{% if fb == "fizz" %}blue{% elif fb == "buzz"%}green{% elif fb == "fizzbuzz"%}red{% else %}black{% endif %};">{{ fb }}</div>
+  {% endfor %}
+</body>
+</html>
