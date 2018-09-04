@@ -1,0 +1,30 @@
+{{ define "content" }}
+{{ template "header" }}
+<h1>動画視聴サイト</h1>
+<button class="btn btn-primary" data-toggle="modal" data-target="#modal-sample">
+  動画を見る
+</button>
+<a href="/second.html">p</a>
+
+<!-- 2.モーダルの配置 -->
+<div class="modal" id="modal-sample" tabindex="-1">
+    <div class="modal-dialog">
+
+        <!-- 3.モーダルのコンテンツ -->
+        <div class="modal-content">
+            <!-- 4.モーダルのヘッダ -->
+            <div class="modal-header">
+                <h4 class="modal-title" id="modal-label">動画</h4>
+            </div>
+            <div class="modal-body">
+              <video src="/static/slide.mp4" controls="on" style="width: 100%;"></video>
+            </div>
+            <!-- 6.モーダルのフッタ -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">閉じる</button>
+            </div>
+        </div>
+    </div>
+</div>
+{{ template "footer" }}
+{{ end }}
