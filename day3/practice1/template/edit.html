@@ -1,0 +1,26 @@
+{% extends "./frame/base.html" %}
+
+{% block content %}
+<form action="/movies/{{movie.ID}}/update" method="post" enctype="multipart/form-data">
+    <div>
+      <label for="">
+        Title: <input type="text" name="title" value="{{movie.Title}}">
+      </label>
+    </div>
+    <div>
+      <div>
+        <div>現在のサムネイル</div>
+        <img width="200px" src="/static{{ movie.Thumbnail }}" alt="">
+      </div>
+      <label for="">
+        Thumbnail: <input type="file" name="thumbnail">
+      </label>
+    </div>
+    <div>
+      <label for="">
+        Movie: <input type="file" name="movie">
+      </label>
+    </div>
+    <input type="submit">
+  </form>
+{% endblock %}

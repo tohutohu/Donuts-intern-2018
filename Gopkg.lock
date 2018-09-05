@@ -10,6 +10,22 @@
   revision = "e9091a26100e9cfb2b6a8f470085bfa541931a91"
 
 [[projects]]
+  digest = "1:320e7ead93de9fd2b0e59b50fd92a4d50c1f8ab455d96bc2eb083267453a9709"
+  name = "github.com/asaskevich/govalidator"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "ccb8e960c48f04d6935e72476ae4a51028f9e22f"
+  version = "v9"
+
+[[projects]]
+  digest = "1:865079840386857c809b72ce300be7580cb50d3d3129ce11bf9aa6ca2bc1934a"
+  name = "github.com/fatih/color"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "5b77d2a35fb0ede96d138fc9a99f5c9b6aef11b4"
+  version = "v1.7.0"
+
+[[projects]]
   digest = "1:434aab943cc1c082c9df36bd4b1f107d9ef4af930d2ce13d3f2eb008df9196f0"
   name = "github.com/flosch/pongo2"
   packages = ["."]
@@ -24,6 +40,14 @@
   pruneopts = "UT"
   revision = "d523deb1b23d913de5bdada721a6071e71283618"
   version = "v1.4.0"
+
+[[projects]]
+  branch = "master"
+  digest = "1:0bc83661c08d37ec8898b9c998f6107a47209e36a3a190a725d74f90c54cd816"
+  name = "github.com/hokaccha/go-prettyjson"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "d229c224a219dcf41e9d2af4684b9782f33f5eb7"
 
 [[projects]]
   branch = "master"
@@ -89,6 +113,14 @@
 
 [[projects]]
   branch = "master"
+  digest = "1:2a6d6f93510531f9a868b9c088e3a3649d4e28ea04eed2f2dfdd97d7e91c1670"
+  name = "github.com/yosssi/gohtml"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "97fbf36f4aa81f723d0530f5495a820ba267ae5f"
+
+[[projects]]
+  branch = "master"
   digest = "1:dedf20eb0d3e8d6aa8a4d3d2fae248222b688ed528201995e152cc497899123c"
   name = "golang.org/x/crypto"
   packages = [
@@ -96,7 +128,18 @@
     "acme/autocert",
   ]
   pruneopts = "UT"
-  revision = "182538f80094b6a8efaade63a8fd8e0d9d5843dd"
+  revision = "0709b304e793a5edb4a2c0145f281ecdc20838a4"
+
+[[projects]]
+  branch = "master"
+  digest = "1:0185c27476ac2aa653c9b932843b41409b9a42a8f38b09c8e25c8fb1fcd499c5"
+  name = "golang.org/x/net"
+  packages = [
+    "html",
+    "html/atom",
+  ]
+  pruneopts = "UT"
+  revision = "8a410e7b638dca158bf9e766925842f6651ff828"
 
 [[projects]]
   branch = "master"
@@ -119,10 +162,13 @@
   analyzer-version = 1
   input-imports = [
     "github.com/MakeNowJust/heredoc",
+    "github.com/asaskevich/govalidator",
     "github.com/flosch/pongo2",
     "github.com/go-sql-driver/mysql",
+    "github.com/hokaccha/go-prettyjson",
     "github.com/jmoiron/sqlx",
     "github.com/labstack/echo",
+    "github.com/yosssi/gohtml",
   ]
   solver-name = "gps-cdcl"
   solver-version = 1

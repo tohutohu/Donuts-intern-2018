@@ -1,0 +1,32 @@
+{% extends "./frame/base.html" %}
+
+{% block title %}動画一覧{% endblock %}
+
+{% block header %}
+<style>
+.movie-container {
+  border: solid 2px black;
+  border-radius: 4px;
+  padding: 4px;
+  margin: 8px;
+}
+
+.movie-container > img {
+  height: 150px;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<h1>動画一覧</h1>
+<div class="movie-list-container">
+  {% for movie in movies %}
+    <div class="movie-container">
+      <a href="/movies/{{ movie.ID }}">
+        <div class="movie-title">{{ movie.Title }}</div>
+      </a>
+      <img src="/static{{ movie.Thumbnail }}" alt="">
+    </div>
+  {% endfor %}
+</div>
+{% endblock %}
