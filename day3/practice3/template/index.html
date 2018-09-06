@@ -1,0 +1,22 @@
+{% extends "./frame/base.html" %}
+
+{% block content %}
+  <form action="/movies" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+      <label for="">
+        Title: <input type="text" class="form-control" name="title">
+      </label>
+    </div>
+    <div class="form-group">
+      <label for="">
+        Thumbnail: <input type="file" class="form-control-file"  name="thumbnail">
+      </label>
+    </div>
+    <div class="form-group">
+      <label for="">
+        Movie: <input type="file" class="form-control-file" name="movie">
+      </label>
+    </div>
+    <input type="submit" class="btn btn-primary" value="投稿する">
+  </form>
+{% endblock %}

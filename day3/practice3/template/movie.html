@@ -1,0 +1,32 @@
+{% extends "./frame/base.html" %}
+
+{% block title %}{{ movie.Title }}{% endblock %}
+
+{% block header %}
+<style>
+.video {
+  width: 100%;
+}
+</style>
+{% endblock %}
+
+
+{% block content %}
+<h1>{{ movie.Title }}</h1>
+<video class="video" src="/static{{ movie.Path }}" controls="on"></video>
+<form method="post">
+<input type="submit" value="この動画を削除する">
+</form>
+<a href="/movies/{{movie.ID}}/edit">この動画を編集する</a>
+
+<form action="/movies/{{movie.ID}}/comments" method="POST">
+  <input type="text" name="comment">
+  <input type="submit">
+</form>
+
+{% for comment in comments %}
+<div>
+{{ comment.Text }}
+</div>
+{% endfor %}
+{% endblock %}

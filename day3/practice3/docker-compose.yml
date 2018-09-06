@@ -1,0 +1,19 @@
+version: "3"
+services:
+  app:
+    build: .
+    ports:
+      - "8080:1323"
+    working_dir: /go/src/github.com/tohutohu/Donuts/day3/practice3
+    volumes:
+      - "./movies:/go/src/github.com/tohutohu/Donuts/day3/practice3/movies"
+      - "./thumbnails:/go/src/github.com/tohutohu/Donuts/day3/practice3/thumbnails"
+    depends_on:
+      - db
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_DATABASE: donuts
+      MYSQL_ROOT_PASSWORD: mysql
+
+
