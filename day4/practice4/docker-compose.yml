@@ -1,0 +1,29 @@
+version: "3"
+services:
+  nginx:
+    build: nginx-rtmp-docker
+    container_name: rtmp-nginx
+    ports:
+      - "1935:1935"
+      - "8888:80"
+    volumes:
+      - "./hls:/srv/hls"
+    depends_on:
+      - app
+  db:
+    image: mysql
+    container_name: db
+    expose:
+      - "3306"
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: live
+      MYSQL_ROOT_PASSWORD: password
+    restart: always
+  app:
+    build: server
+    container_name: manage-server
+    depends_on:
+      - db
+

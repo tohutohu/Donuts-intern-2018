@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package proto;
+
+service FizzBuzz {
+    rpc CalcFizzBuzz (CalcFizzBuzzRequest) returns (CalcFizzBuzzReply) {}
+    rpc SquareList (SquareListRequest) returns (SquareListReply) {}
+    rpc Stream(stream StreamStruct) returns (stream StreamStruct) {}
+}
+
+message CalcFizzBuzzRequest {
+    int64 num = 1;
+}
+
+message CalcFizzBuzzReply {
+    string res = 1;
+}
+
+message SquareListRequest {
+  repeated int64 numList = 1;
+}
+
+message SquareListReply {
+  repeated int64 numList = 1;
+} 
+
+message StreamStruct {
+  int64 num = 1;
+}

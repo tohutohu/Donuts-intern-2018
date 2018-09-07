@@ -1,2 +1,8 @@
 tmp
 vendor
+hls
+node_modules
+.cache
+dist
+db
+

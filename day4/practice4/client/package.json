@@ -1,0 +1,22 @@
+{
+  "dependencies": {
+    "axios": "^0.18.0",
+    "babel": "^6.23.0",
+    "components": "^0.1.0",
+    "core-js": "^2.5.7",
+    "hls": "0.0.1",
+    "hls.js": "^0.11.0",
+    "vue": "^2.5.17",
+    "vue-hot-reload-api": "^2.3.0"
+  },
+  "devDependencies": {
+    "@vue/component-compiler-utils": "^2.2.0",
+    "vue-template-compiler": "^2.5.17"
+  },
+  "browserslist": [
+    "last 1 Chrome version"
+  ],
+  "alias": {
+    "vue": "./node_modules/vue/dist/vue.common.js"
+  }
+}
