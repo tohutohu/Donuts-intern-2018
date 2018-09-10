@@ -1,0 +1,73 @@
+version: "2"
+services:
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "8080:80"
+    restart: always
+    depends_on:
+      - rtmp
+      - live-server
+      - chat-server
+      - client
+    volumes:
+      - "./nginx/nginx.conf:/etc/nginx/nginx.conf"
+  rtmp:
+    build: nginx-rtmp-docker
+    container_name: nginx
+    ports:
+      - "1935:1935"
+    expose:
+      - "80"
+    volumes:
+      - "./hls:/srv/hls"
+    depends_on:
+      - live-server
+      - client
+  db:
+    image: mysql:5.7
+    container_name: minich-db
+    volumes:
+      - "./db:/var/lib/mysql"
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: live
+      MYSQL_ROOT_PASSWORD: password
+    restart: always
+  live-server:
+    build: live-server
+    container_name: live-server
+    restart: always
+    expose:
+      - "1323"
+    depends_on:
+      - db
+  redis:
+    image: redis
+    ports:
+      - "6379"
+  chat-server:
+    build: chat-server
+    container_name: chat-server
+    depends_on:
+      - redis
+    restart: always
+    expose:
+      - "1323"
+  client:
+    build: client
+    container_name: client
+    depends_on:
+      - live-server
+      - chat-server
+    working_dir: /work
+    volumes: 
+      - "./client:/work"
+    command: npm run dev
+    environment:
+      - "HOST=0.0.0.0"
+    expose:
+      - "3000"
+
+
