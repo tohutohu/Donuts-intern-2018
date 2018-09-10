@@ -1,0 +1,23 @@
+version: "3"
+services:
+  redis:
+    image: redis
+    ports:
+      - "6379:6379"
+  app1:
+    build: ./server
+    depends_on:
+      - redis
+    restart: always
+    environment:
+      - "PORT=8888"
+    ports:
+      - "8888:8888"
+  app2:
+    build: ./server
+    depends_on:
+      - redis
+    restart: always
+    ports:
+      - "1323:1323"
+
