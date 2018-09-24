@@ -55,6 +55,8 @@ services:
     restart: always
     expose:
       - "1323"
+    depends_on:
+      - db
   client:
     build: client
     container_name: client

@@ -4,19 +4,34 @@
       <div>配信一覧</div>
       <div v-for="live in lives" :key="live.st">
         {{live}}
-        <a :href="`/lives/${live.Name}`">ライブを見る</a>
+        <a :href="`/lives/${live.name}`">ライブを見る</a>
       </div>
+    </div>
+    <div>
+      <input type="text" v-model="username">
+      <input type="password" v-model="password">
+      <button @click="login">ログイン</button>
     </div>
   </section>
 </template>
 
 <script>
-
 export default {
+  data () {
+    return {
+      username: '',
+      password: ''
+    }
+  },
   async asyncData({ app }) {
     const url = process.server?'http://live-server:1323/api/lives':'/api/lives';
     const { data } = await app.$axios.get(url)
     return { lives: data }
+  },
+  methods:{
+    login() {
+      this.$axios.$post('http://localhost:8080/api/login', {username: this.username, password: this.password})
+    }
   }
 }
 </script>

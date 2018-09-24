@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"log"
 	"time"
@@ -25,7 +26,8 @@ const (
 type Client struct {
 	conn *websocket.Conn
 	hub  *Hub
-	send chan interface{}
+	send chan WSMessage
+	name string
 }
 
 func (c *Client) readPump() {
@@ -40,17 +42,25 @@ func (c *Client) readPump() {
 		return nil
 	})
 	for {
-		message := Message{}
-		err := c.conn.ReadJSON(&message)
+		message := WSMessage{}
+		_, body, err := c.conn.ReadMessage()
 		if err != nil {
 			fmt.Println(err)
 			if websocket.IsUnexpectedCloseError(err, websocket.CloseGoingAway, websocket.CloseAbnormalClosure) {
 				log.Printf("error: %v", err)
 			}
-			break
+			continue
+		}
+		if err := json.Unmarshal(body, &message); err != nil {
+			fmt.Println(err)
+			continue
 		}
 		fmt.Println(message)
-		c.hub.broadcast <- message
+		switch message.Type {
+		case "message-create":
+			message.Data.(map[string]interface{})["username"] = c.name
+			c.hub.broadcast <- message
+		}
 	}
 }
 

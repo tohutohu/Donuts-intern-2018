@@ -1,13 +1,15 @@
 package main
 
 import (
-	"fmt"
 	"net/http"
 
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 	"github.com/labstack/echo"
-	"github.com/tohutohu/Donuts/day6/practice1/live-server/db"
-	"github.com/tohutohu/Donuts/day6/practice1/live-server/router"
+	"github.com/labstack/echo-contrib/session"
+	"github.com/labstack/echo/middleware"
+	"github.com/srinathgs/mysqlstore"
+	"github.com/tohutohu/Donuts/product/live-server/db"
+	"github.com/tohutohu/Donuts/product/live-server/router"
 )
 
 func main() {
@@ -25,16 +27,12 @@ func main() {
 	//	AllowCredentials: true,
 	//}))
 
-	e.Use(func(next echo.HandlerFunc) echo.HandlerFunc {
-		return func(c echo.Context) error {
-			fmt.Println(c.Request().RequestURI)
-			for k, v := range c.QueryParams() {
-				fmt.Printf("%s : %v\n", k, v)
-			}
-			fmt.Println()
-			return next(c)
-		}
-	})
+	store, err := mysqlstore.NewMySQLStoreFromConnection(db.DB(), "sessions", "/", 60*60*24*14, []byte("secret-token"))
+	if err != nil {
+		panic(err)
+	}
+	e.Use(middleware.Logger())
+	e.Use(session.Middleware(store))
 
 	e.GET("/api/ping", func(c echo.Context) error {
 		return c.String(http.StatusOK, "pong")
@@ -45,6 +43,9 @@ func main() {
 
 	e.GET("/api/lives", r.GetLives)
 	e.POST("/api/lives", r.GetLiveEndpoint)
+	e.POST("/api/users", r.PostUsers)
+	e.POST("/api/login", r.PostLogin)
+	e.POST("/api/whoami", r.GetWhoAmI)
 	// e.GET("/api/lives", getLives)
 
 	e.Logger.Fatal(e.Start(":1323"))

@@ -8,7 +8,7 @@ RUN apk --update add tzdata && \
     rm -rf /var/cache/apk/*
 ADD https://github.com/golang/go/raw/master/lib/time/zoneinfo.zip /usr/local/go/lib/time/zoneinfo.zip
 
-WORKDIR /go/src/github.com/tohutohu/Donuts/day4/practice4/server
+WORKDIR /go/src/github.com/tohutohu/Donuts/product/live-server
 COPY Gopkg.toml Gopkg.lock ./
 RUN dep ensure -v -vendor-only=true
 

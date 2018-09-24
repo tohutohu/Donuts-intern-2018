@@ -73,6 +73,10 @@ func (s *Server) CleanRooms() {
 			fmt.Println("clean", roomName)
 			s.SendRoomEvent(DELETE, roomName)
 			delete(s.hubs, roomName)
+			s.redis.client.Del(roomName)
+			s.redis.client.Del(roomName + "_now_count")
+			s.redis.client.Del(roomName + "_cum_count")
+			s.redis.client.ZRem("live-ranking", roomName)
 		}
 	}
 }

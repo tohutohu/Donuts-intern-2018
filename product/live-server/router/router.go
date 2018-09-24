@@ -2,13 +2,7 @@ package router
 
 import "github.com/jinzhu/gorm"
 
-type Live struct {
-	gorm.Model
-	Name string
-	E    string
-	St   string
-	Done bool
-}
+type H map[string]string
 
 type router struct {
 	db *gorm.DB

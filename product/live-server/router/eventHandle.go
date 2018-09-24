@@ -4,6 +4,7 @@ import (
 	"net/http"
 
 	"github.com/labstack/echo"
+	"github.com/tohutohu/Donuts/product/live-server/db"
 )
 
 func (r *router) StartLive(c echo.Context) error {
@@ -11,7 +12,7 @@ func (r *router) StartLive(c echo.Context) error {
 	e := c.QueryParam("e")
 	st := c.QueryParam("st")
 
-	live := &Live{
+	live := &db.Live{
 		Name: name,
 		E:    e,
 		St:   st,
@@ -28,7 +29,7 @@ func (r *router) EndLive(c echo.Context) error {
 	e := c.QueryParam("e")
 	st := c.QueryParam("st")
 
-	live := &Live{
+	live := &db.Live{
 		Name: name,
 		E:    e,
 		St:   st,

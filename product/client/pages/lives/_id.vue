@@ -6,8 +6,9 @@
       </div>
       <div class="chat-container">
         <div class="messages-container">
-          <div v-for="m in messages" :key="m.text">
-            {{m.text}}
+          <div v-for="m in messages" :key="m.text" class="message">
+            <div class="username">{{m.username}}</div>
+            <div class="text">{{m.text}}</div>
           </div>
         </div>
         <div class="input-component">
@@ -36,6 +37,10 @@ export default {
     this.socket = new WS()
     this.socket.on('message-create', data => {
       this.messages.push(data)
+    })
+
+    this.socket.on('initial-data', data => {
+      this.messages = data.reverse()
     })
     await this.socket.connect('ws://localhost:8080/ws/' + this.$route.params.id)
     this.startVideo()
@@ -114,5 +119,18 @@ export default {
 .input-component > button:hover {
   background: #dadada;
   transition-duration: 0.2s;
+}
+
+.username {
+  color: #dadada;
+  margin-right: 8px;
+}
+
+.message {
+  margin-bottom: 12px;
+  display: flex;
+  word-wrap: wrap;
+  word-break: breakall;
+
 }
 </style>

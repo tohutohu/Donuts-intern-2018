@@ -39,6 +39,8 @@ module.exports = {
     '@nuxtjs/axios'
   ],
   axios: {
+    credentials: true,
+    baseURL: 'http://localhost:8080'
   },
   css: [
     '@fortawesome/fontawesome-free-webfonts',
